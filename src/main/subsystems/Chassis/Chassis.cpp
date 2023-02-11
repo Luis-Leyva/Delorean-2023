@@ -4,7 +4,24 @@
 
 #include "Chassis.h"
 
-Chassis::Chassis() = default;
+#include <frc/trajectory/constraint/CentripetalAccelerationConstraint.h>
+#include <iostream>
+
+Chassis::Chassis() {
+    LeftSlave.Follow(LeftMaster);
+    RightSlave.Follow(RightMaster);
+
+    rightMaster.SetInverted(InvertType::InvertMotorOutput);     //PENDIENTE
+    rightSlave1.SetInverted(InvertType::InvertMotorOutput);     //PENDIENTE
+    rightSlave2.SetInverted(InvertType::InvertMotorOutput);     //PENDIENTE
+
+    LeftMaster.ConfigSupplyCurrentLimit(SupplyCurrentLimitConfiguration(true, 30, 0, 1));
+    RightMaster.ConfigSupplyCurrentLimit(SupplyCurrentLimitConfiguration(true, 30, 0, 1));
+
+    
+}
+    
+}
 
 // This method will be called once per scheduler run
 void Chassis::Periodic() {}
